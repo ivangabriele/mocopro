@@ -2,7 +2,7 @@
 	"name": "mocopro",
 	"description": "A CLI tool to install, run, and manage MCP servers locally using containers, with built-in configuration for popular MCP clients.",
 	"license": "AGL-3.0",
-	"version": "0.0.0",
+	"version": "1.0.0-alpha.0",
 	"type": "module",
 	"engines": {
 		"bun": ">=1.3 <2",
@@ -44,10 +44,22 @@
 		"url": "https://www.ivangabriele.com"
 	},
 	"bugs": "https://github.com/ivangabriele/mocopro/issues",
-  "homepage": "https://github.com/ivangabriele/mocopro#readme",
-	"keywords": ["cli", "docker", "local", "manager", "mcp", "mcp-server", "model-context-protocol", "podman", "self-hosted", "server", "smithery"],
+	"homepage": "https://github.com/ivangabriele/mocopro#readme",
+	"keywords": [
+		"cli",
+		"docker",
+		"local",
+		"manager",
+		"mcp",
+		"mcp-server",
+		"model-context-protocol",
+		"podman",
+		"self-hosted",
+		"server",
+		"smithery"
+	],
 	"repository": {
-    "type": "git",
-    "url": "git+https://github.com/ivangabriele/mocopro.git"
-  }
+		"type": "git",
+		"url": "git+https://github.com/ivangabriele/mocopro.git"
+	}
 }
