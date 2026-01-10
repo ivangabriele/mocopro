@@ -15,6 +15,7 @@
 		"build": "bun build src/index.ts --outdir dist --target node",
 		"compile": "bun run ./scripts/compile.ts",
 		"dev": "bun run src/index.ts",
+		"docs:demo": "mocopro uninstall unsplash-smart-mcp-server|| true; vhs docs/demo.tape",
 		"link": "bun run build && ln -s $(pwd)/dist/index.js ~/.local/bin/mocopro",
 		"pack": "bun pm pack",
 		"pack:dry": "bun pm pack --dry-run",

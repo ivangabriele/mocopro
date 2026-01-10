@@ -11,6 +11,8 @@ MoCoPro is a Container-Native and Local-First MCP Servers Orchestration CLI.
 > [!NOTE]  
 > Self-hosting on your own servers coming soon!
 
+![Screencast Demo](docs/example.gif)
+
 ---
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
