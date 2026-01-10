@@ -38,7 +38,7 @@ mise use -g npm:mocopro
 
 ### Self-Contained Binary
 
-> [!WARNING]  
+> [!NOTE]  
 > Since it contains a full Node.js runtime, be aware of the size: ~60-110MB.
 
 #### Linux, macOS and Windows WSL
@@ -60,7 +60,7 @@ Download [the latest release](https://github.com/ivangabriele/mocopro/releases).
 mocopro self-uninstall
 ```
 
-> [!WARNING]  
+> [!NOTE]  
 > If you installed the self-contained binary on **non-WSL Windows**, this command won't work. You need to manually:
 > 1. Stop and remove all your Docker/Podman MCP Server containers.
 > 2. Delete the exe file wherever you pasted it.
