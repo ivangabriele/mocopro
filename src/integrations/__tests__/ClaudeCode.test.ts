@@ -2,26 +2,26 @@ import { afterEach, describe, expect, test } from 'bun:test'
 import { rm } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
-import { ClaudeIntegration } from '../ClaudeIntegration.js'
+import { ClaudeCode } from '../ClaudeCode.js'
 
-describe('ClaudeIntegration', () => {
-  const integration = new ClaudeIntegration()
+describe('ClaudeCode', () => {
+  const claudeCode = new ClaudeCode()
 
   describe('name', () => {
-    test('returns Claude CLI', () => {
-      expect(integration.name).toBe('Claude CLI')
+    test('returns Claude Code', () => {
+      expect(claudeCode.name).toBe('Claude Code')
     })
   })
 
   describe('getConfigPath', () => {
     test('returns global config path when scope is global', () => {
-      const result = integration.getConfigPath('global')
+      const result = claudeCode.getConfigPath('global')
 
       expect(result).toBe(join(homedir(), '.claude.json'))
     })
 
     test('returns local config path when scope is local', () => {
-      const result = integration.getConfigPath('local')
+      const result = claudeCode.getConfigPath('local')
 
       expect(result).toBe(join(process.cwd(), '.mcp.json'))
     })
@@ -29,7 +29,7 @@ describe('ClaudeIntegration', () => {
 
   describe('buildServerConfig', () => {
     test('builds config without environment variables', () => {
-      const result = integration.buildServerConfig('podman', 'mocopro/owner-repo', 'main', {})
+      const result = claudeCode.buildServerConfig('podman', 'mocopro/owner-repo', 'main', {})
 
       expect(result).toEqual({
         args: ['run', '--rm', '-i', 'mocopro/owner-repo:main'],
@@ -38,19 +38,15 @@ describe('ClaudeIntegration', () => {
       })
     })
 
-    test('builds config with environment variables', () => {
-      const result = integration.buildServerConfig('docker', 'mocopro/owner-repo', 'v1.0.0', {
+    test('builds config with environment variables as container flags', () => {
+      const result = claudeCode.buildServerConfig('docker', 'mocopro/owner-repo', 'v1.0.0', {
         API_KEY: 'secret123',
         DEBUG: 'true',
       })
 
       expect(result).toEqual({
-        args: ['run', '--rm', '-i', 'mocopro/owner-repo:v1.0.0'],
+        args: ['run', '--rm', '-i', '-e', 'API_KEY=secret123', '-e', 'DEBUG=true', 'mocopro/owner-repo:v1.0.0'],
         command: 'docker',
-        env: {
-          API_KEY: 'secret123',
-          DEBUG: 'true',
-        },
         type: 'stdio',
       })
     })
@@ -70,7 +66,7 @@ describe('ClaudeIntegration', () => {
         type: 'stdio' as const,
       }
 
-      await integration.addServer('local', 'test-server', serverConfig)
+      await claudeCode.addServer('local', 'test-server', serverConfig)
 
       const content = await Bun.file(testConfigPath).text()
       const config = JSON.parse(content)
@@ -95,7 +91,7 @@ describe('ClaudeIntegration', () => {
         type: 'stdio' as const,
       }
 
-      await integration.addServer('local', 'new-server', serverConfig)
+      await claudeCode.addServer('local', 'new-server', serverConfig)
 
       const content = await Bun.file(testConfigPath).text()
       const config = JSON.parse(content)
@@ -112,7 +108,7 @@ describe('ClaudeIntegration', () => {
     })
 
     test('returns false when config does not exist', async () => {
-      const result = await integration.removeServer('local', 'nonexistent')
+      const result = await claudeCode.removeServer('local', 'nonexistent')
 
       expect(result).toBe(false)
     })
@@ -129,7 +125,7 @@ describe('ClaudeIntegration', () => {
       }
       await Bun.write(testConfigPath, JSON.stringify(existingConfig))
 
-      const result = await integration.removeServer('local', 'nonexistent')
+      const result = await claudeCode.removeServer('local', 'nonexistent')
 
       expect(result).toBe(false)
     })
@@ -151,7 +147,7 @@ describe('ClaudeIntegration', () => {
       }
       await Bun.write(testConfigPath, JSON.stringify(existingConfig))
 
-      const result = await integration.removeServer('local', 'test-server')
+      const result = await claudeCode.removeServer('local', 'test-server')
 
       expect(result).toBe(true)
       const content = await Bun.file(testConfigPath).text()
@@ -169,7 +165,7 @@ describe('ClaudeIntegration', () => {
     })
 
     test('returns false when config does not exist', async () => {
-      const result = await integration.hasServer('local', 'test-server')
+      const result = await claudeCode.hasServer('local', 'test-server')
 
       expect(result).toBe(false)
     })
@@ -186,7 +182,7 @@ describe('ClaudeIntegration', () => {
       }
       await Bun.write(testConfigPath, JSON.stringify(existingConfig))
 
-      const result = await integration.hasServer('local', 'test-server')
+      const result = await claudeCode.hasServer('local', 'test-server')
 
       expect(result).toBe(false)
     })
@@ -203,7 +199,7 @@ describe('ClaudeIntegration', () => {
       }
       await Bun.write(testConfigPath, JSON.stringify(existingConfig))
 
-      const result = await integration.hasServer('local', 'test-server')
+      const result = await claudeCode.hasServer('local', 'test-server')
 
       expect(result).toBe(true)
     })

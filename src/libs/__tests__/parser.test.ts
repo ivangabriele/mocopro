@@ -3,12 +3,12 @@ import { buildContainerName, buildImageName, parseRepositoryInput } from '../par
 
 describe('parseRepositoryInput', () => {
   test('parses short format owner/repository', () => {
-    const result = parseRepositoryInput('drumnation/unsplash-smart-mcp-server')
+    const result = parseRepositoryInput('hellokaton/unsplash-mcp-server')
 
     expect(result.owner).toBe('drumnation')
-    expect(result.repository).toBe('unsplash-smart-mcp-server')
+    expect(result.repository).toBe('unsplash-mcp-server')
     expect(result.branch).toBeUndefined()
-    expect(result.fullUrl).toBe('https://github.com/drumnation/unsplash-smart-mcp-server.git')
+    expect(result.fullUrl).toBe('hellokaton/unsplash-mcp-server.git')
   })
 
   test('parses short format with branch', () => {
@@ -29,12 +29,12 @@ describe('parseRepositoryInput', () => {
   })
 
   test('parses full GitHub URL', () => {
-    const result = parseRepositoryInput('https://github.com/drumnation/unsplash-smart-mcp-server')
+    const result = parseRepositoryInput('hellokaton/unsplash-mcp-server')
 
     expect(result.owner).toBe('drumnation')
-    expect(result.repository).toBe('unsplash-smart-mcp-server')
+    expect(result.repository).toBe('unsplash-mcp-server')
     expect(result.branch).toBeUndefined()
-    expect(result.fullUrl).toBe('https://github.com/drumnation/unsplash-smart-mcp-server.git')
+    expect(result.fullUrl).toBe('hellokaton/unsplash-mcp-server.git')
   })
 
   test('parses GitHub URL with .git suffix', () => {
@@ -98,16 +98,16 @@ describe('parseRepositoryInput', () => {
 
 describe('buildImageName', () => {
   test('builds correct image name', () => {
-    const result = buildImageName('drumnation', 'unsplash-smart-mcp-server')
+    const result = buildImageName('drumnation', 'unsplash-mcp-server')
 
-    expect(result).toBe('mocopro/drumnation-unsplash-smart-mcp-server')
+    expect(result).toBe('mocopro/drumnation-unsplash-mcp-server')
   })
 })
 
 describe('buildContainerName', () => {
   test('builds correct container name', () => {
-    const result = buildContainerName('unsplash-smart-mcp-server')
+    const result = buildContainerName('unsplash-mcp-server')
 
-    expect(result).toBe('mocopro-unsplash-smart-mcp-server')
+    expect(result).toBe('mocopro-unsplash-mcp-server')
   })
 })

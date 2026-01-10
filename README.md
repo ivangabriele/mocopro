@@ -136,13 +136,13 @@ mocopro self-uninstall
 
 ```bash
 # From owner/repository format
-mocopro install drumnation/unsplash-smart-mcp-server
+mocopro install hellokaton/unsplash-mcp-server
 
 # From full GitHub URL
-mocopro install https://github.com/drumnation/unsplash-smart-mcp-server
+mocopro install hellokaton/unsplash-mcp-server
 
 # With specific branch or tag
-mocopro install drumnation/unsplash-smart-mcp-server#v1.0.0
+mocopro install hellokaton/unsplash-mcp-server#v1.0.0
 ```
 
 ### List installed servers
@@ -155,41 +155,41 @@ mocopro list
 
 ```bash
 # Set one or more environment variables
-mocopro env set unsplash-smart-mcp-server UNSPLASH_ACCESS_KEY=your_api_key
+mocopro env set unsplash-mcp-server UNSPLASH_ACCESS_KEY=your_api_key
 
 # List environment variables
-mocopro env list unsplash-smart-mcp-server
+mocopro env list unsplash-mcp-server
 
 # Unset environment variables
-mocopro env unset unsplash-smart-mcp-server UNSPLASH_ACCESS_KEY
+mocopro env unset unsplash-mcp-server UNSPLASH_ACCESS_KEY
 ```
 
 ### Start a server
 
 ```bash
 # Start in foreground (Ctrl+C to stop)
-mocopro start unsplash-smart-mcp-server
+mocopro start unsplash-mcp-server
 
 # Start in background
-mocopro start unsplash-smart-mcp-server --detach
+mocopro start unsplash-mcp-server --detach
 ```
 
 ### Stop a server
 
 ```bash
-mocopro stop unsplash-smart-mcp-server
+mocopro stop unsplash-mcp-server
 ```
 
 ### Update a server
 
 ```bash
-mocopro update unsplash-smart-mcp-server
+mocopro update unsplash-mcp-server
 ```
 
 ### Uninstall a server
 
 ```bash
-mocopro uninstall unsplash-smart-mcp-server
+mocopro uninstall unsplash-mcp-server
 ```
 
 ### Configure for Claude CLI
@@ -198,20 +198,20 @@ Add a server to Claude CLI configuration:
 
 ```bash
 # Add to local configuration (.mcp.json in current directory)
-mocopro setup claude add unsplash-smart-mcp-server
+mocopro setup claude add unsplash-mcp-server
 
 # Add to global configuration (~/.claude.json)
-mocopro setup claude add unsplash-smart-mcp-server --global
+mocopro setup claude add unsplash-mcp-server --global
 ```
 
 Remove a server from Claude CLI configuration:
 
 ```bash
 # Remove from local configuration
-mocopro setup claude remove unsplash-smart-mcp-server
+mocopro setup claude remove unsplash-mcp-server
 
 # Remove from global configuration
-mocopro setup claude remove unsplash-smart-mcp-server --global
+mocopro setup claude remove unsplash-mcp-server --global
 ```
 
 ## MCP Server Requirements

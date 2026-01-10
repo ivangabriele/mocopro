@@ -7,8 +7,8 @@ import type { McpClientIntegration, McpServerConfig } from './types.js'
 const CLAUDE_GLOBAL_CONFIG_FILENAME = '.claude.json'
 const CLAUDE_LOCAL_CONFIG_FILENAME = '.mcp.json'
 
-export class ClaudeIntegration implements McpClientIntegration {
-  readonly name = 'Claude CLI'
+export class ClaudeCode implements McpClientIntegration {
+  readonly name = 'Claude Code'
 
   getConfigPath(scope: SetupScope): string {
     if (scope === 'global') {
@@ -24,21 +24,19 @@ export class ClaudeIntegration implements McpClientIntegration {
     imageTag: string,
     environmentVariables: EnvironmentVariables,
   ): McpServerConfig {
-    const config: McpServerConfig = {
-      args: ['run', '--rm', '-i', `${imageName}:${imageTag}`],
+    const args = ['run', '--rm', '-i']
+
+    for (const [key, value] of Object.entries(environmentVariables)) {
+      args.push('-e', `${key}=${value}`)
+    }
+
+    args.push(`${imageName}:${imageTag}`)
+
+    return {
+      args,
       command: runtime,
       type: 'stdio',
     }
-
-    const envVarEntries = Object.entries(environmentVariables)
-    if (envVarEntries.length > 0) {
-      config.env = {}
-      for (const [key, value] of envVarEntries) {
-        config.env[key] = value
-      }
-    }
-
-    return config
   }
 
   async addServer(scope: SetupScope, serverName: string, serverConfig: McpServerConfig): Promise<void> {

@@ -1,12 +1,10 @@
 import { afterAll, beforeAll, describe, expect, test } from 'bun:test'
 import { rm } from 'node:fs/promises'
-import { homedir } from 'node:os'
 import { join } from 'node:path'
 
 const CLI_PATH = join(import.meta.dir, '..', 'src', 'index.ts')
-const TEST_SERVER_REPO = 'drumnation/unsplash-smart-mcp-server'
-const TEST_SERVER_NAME = 'unsplash-smart-mcp-server'
-const MOCOPRO_DIR = join(homedir(), '.mocopro')
+const TEST_SERVER_REPO = 'hellokaton/unsplash-mcp-server'
+const TEST_SERVER_NAME = 'unsplash-mcp-server'
 const LOCAL_MCP_CONFIG_PATH = join(process.cwd(), '.mcp.json')
 
 interface CommandResult {
@@ -185,11 +183,11 @@ describe('mocopro CLI', () => {
         expect(result.stderr).toContain('not installed')
       })
 
-      test('add adds server to local Claude CLI configuration', async () => {
+      test('add adds server to local Claude Code configuration', async () => {
         const result = await runCli(['setup', 'claude', 'add', TEST_SERVER_NAME])
 
         expect(result.exitCode).toBe(0)
-        expect(result.stdout).toContain('has been added to Claude CLI configuration')
+        expect(result.stdout).toContain('has been added to Claude Code configuration')
         expect(result.stdout).toContain('.mcp.json')
 
         const configContent = await Bun.file(LOCAL_MCP_CONFIG_PATH).text()
@@ -206,11 +204,11 @@ describe('mocopro CLI', () => {
         expect(result.stderr).toContain('already configured')
       })
 
-      test('remove removes server from local Claude CLI configuration', async () => {
+      test('remove removes server from local Claude Code configuration', async () => {
         const result = await runCli(['setup', 'claude', 'remove', TEST_SERVER_NAME])
 
         expect(result.exitCode).toBe(0)
-        expect(result.stdout).toContain('has been removed from Claude CLI configuration')
+        expect(result.stdout).toContain('has been removed from Claude Code configuration')
         expect(result.stdout).toContain('.mcp.json')
 
         const configContent = await Bun.file(LOCAL_MCP_CONFIG_PATH).text()

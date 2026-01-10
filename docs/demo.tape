@@ -67,18 +67,18 @@ Set Padding 16
 Set TypingSpeed 50ms
 Set PlaybackSpeed 3.0
 
-Type `mocopro install https://github.com/drumnation/unsplash-smart-mcp-server`
+Type `mocopro install https://github.com/hellokaton/unsplash-mcp-server`
 Enter
-Wait
-Type `mocopro env set unsplash-smart-mcp-server UNSPLASH_ACCESS_KEY="*******************************************"`
+Wait@60s
+Type `mocopro env set unsplash-mcp-server UNSPLASH_ACCESS_KEY="*******************************************"`
 Enter
 Wait
 Hide
-Type `set -a; source ../.env; set +a; mocopro env set unsplash-smart-mcp-server UNSPLASH_ACCESS_KEY=$UNSPLASH_ACCESS_KEY`
+Type `set -a; source ../.env; set +a; mocopro env set unsplash-mcp-server UNSPLASH_ACCESS_KEY=$UNSPLASH_ACCESS_KEY`
 Enter
 Wait
 Show
-Type `mocopro start -d unsplash-smart-mcp-server`
+Type `mocopro start -d unsplash-mcp-server`
 Enter
 Wait
 

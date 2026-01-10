@@ -47,9 +47,9 @@ describe('getRegistryFilePath', () => {
 
 describe('getRepositoryLocalPath', () => {
   test('returns correct repository path with owner_repo format', () => {
-    const result = getRepositoryLocalPath('drumnation', 'unsplash-smart-mcp-server')
+    const result = getRepositoryLocalPath('drumnation', 'unsplash-mcp-server')
 
-    expect(result).toBe(join(homedir(), '.mocopro', 'repos', 'drumnation_unsplash-smart-mcp-server'))
+    expect(result).toBe(join(homedir(), '.mocopro', 'repos', 'drumnation_unsplash-mcp-server'))
   })
 })
 
