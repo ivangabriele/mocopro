@@ -1,8 +1,12 @@
 # MoCoPro
 
-A CLI tool to install, run, and manage MCP servers locally using containers, with built-in configuration for popular MCP clients.
+MoCoPro is a Container-Native and Local-First MCP Servers Orchestration CLI.
 
-Like Smithery, but free and local.
+**Features**:
+- Install and manage MCP servers locally from any GitHub repository with a root `Dockerfile` or `smithery.yaml` file.
+- Run MCP servers in native Docker/Podman containers.
+- Configure popular MCP clients for installed servers.
+- 100% Free. No Registry. No Sign Up.
 
 > [!NOTE]  
 > Self-hosting on your own servers coming soon!
@@ -67,12 +71,12 @@ Like Smithery, but free and local.
 
 ## Compatibility
 
-- Installable MCP Servers
-  - Any GitHub-hosted MCP Server with a root `Dockerfile` or `smithery.yaml` file.
-  - _Other Git Hosters coming soon._
-- Integrations
+- **MCP Servers**
+  - Any GitHub-hosted MCP server with a root `Dockerfile` or `smithery.yaml` file.
+  - _Other Git hosts coming soon._
+- **MCP Clients**
   - Claude CLI
-  - _Many other MCP Clients coming soon._
+  - _More clients coming soon._
 
 ## Installation
 
