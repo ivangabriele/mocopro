@@ -7,6 +7,64 @@ Like Smithery, but free and local.
 > [!NOTE]  
 > Self-hosting on your own servers coming soon!
 
+---
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Feature Comparison](#feature-comparison)
+- [Compatibility](#compatibility)
+- [Installation](#installation)
+  - [NPM Package](#npm-package)
+  - [Self-Contained Binary](#self-contained-binary)
+    - [Linux, macOS and Windows WSL](#linux-macos-and-windows-wsl)
+    - [Non-WSL Windows](#non-wsl-windows)
+- [Uninstallation](#uninstallation)
+- [Usage](#usage)
+  - [Install a server](#install-a-server)
+  - [List installed servers](#list-installed-servers)
+  - [Set environment variables](#set-environment-variables)
+  - [Start a server](#start-a-server)
+  - [Stop a server](#stop-a-server)
+  - [Update a server](#update-a-server)
+  - [Uninstall a server](#uninstall-a-server)
+  - [Configure for Claude CLI](#configure-for-claude-cli)
+- [MCP Server Requirements](#mcp-server-requirements)
+- [Data Storage](#data-storage)
+- [Container Runtime](#container-runtime)
+- [Contributing](#contributing)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+---
+
+## Feature Comparison
+
+| | MoCoPro | [MCPM][link-mcpm] | [Smithery CLI][link-smithery-cli] | [install-mcp][link-install-mcp] |
+|---|:---:|:---:|:---:|:---:|
+| Build MCP Servers from GitHub repositories | ✅ | ❌ | ❌ | ❌ |
+| Run MCP Servers locally | ✅ | ✅ | ❌[^1] | ❌ |
+| Self-host MCP Servers | 🎯[^2] | ❌ | ❌ | ❌ |
+| Write MCP Clients config entries | ✅ | ✅ | ✅ | ✅ |
+| Compatible with MCP Servers via `Dockerfile` | ✅ | ❌ | ❌[^3] | ❌ |
+| Compatible with MCP Servers via `smithery.yaml` | ✅ | ❌ | ✅ | ❌ |
+| No registry required | ✅ | ❌ | ❌ | ✅ |
+| No signup required | ✅ | ✅ | ⚠️[^4] | ✅ |
+| Native container lifecycle management | ✅ | ❌ | ❌ | ❌ |
+| Podman support | ✅ | ❌ | ❌ | ❌ |
+| Environment variable management | ✅ | ✅ | ❌ | ❌ |
+
+[^1]: `smithery run` executes servers from the Smithery registry, not locally-built containers.
+[^2]: Planned.
+[^3]: Smithery requires a `smithery.yaml` file; standalone Dockerfiles are not supported.
+[^4]: Some operations require Smithery account authentication.
+
+[link-mcpm]: https://github.com/pathintegral-institute/mcpm.sh
+[link-smithery-cli]: https://github.com/smithery-ai/cli
+[link-install-mcp]: https://github.com/supermemoryai/install-mcp
+
 ## Compatibility
 
 - Installable MCP Servers
@@ -14,7 +72,7 @@ Like Smithery, but free and local.
   - _Other Git Hosters coming soon._
 - Integrations
   - Claude CLI
-  - _Other MCP Clients coming soon._
+  - _Many other MCP Clients coming soon._
 
 ## Installation
 
