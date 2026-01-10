@@ -9,7 +9,7 @@ const targets = [
   { out: 'mocopro-darwin-x64', target: 'bun-darwin-x64' },
   { out: 'mocopro-darwin-arm64', target: 'bun-darwin-arm64' },
   { out: 'mocopro-windows-x64.exe', target: 'bun-windows-x64' },
-  { out: 'mocopro-windows-arm64.exe', target: 'bun-windows-arm64' },
+  // { out: 'mocopro-windows-arm64.exe', target: 'bun-windows-arm64' },
 ]
 
 for (const { target, out } of targets) {
