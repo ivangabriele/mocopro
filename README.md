@@ -245,6 +245,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
 
 ## License
 
-[AGPL-3.0](LICENSE.md)
+[AGPL-3.0-or-later](LICENSE.md)
 
 ---

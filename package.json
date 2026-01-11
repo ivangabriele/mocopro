@@ -1,7 +1,7 @@
 {
 	"name": "mocopro",
 	"description": "A CLI tool to install, run, and manage MCP servers locally using containers, with built-in configuration for popular MCP clients.",
-	"license": "AGL-3.0",
+	"license": "AGPL-3.0-or-later",
 	"version": "1.0.0-alpha.1",
 	"type": "module",
 	"engines": {
