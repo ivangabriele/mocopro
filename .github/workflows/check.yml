@@ -40,6 +40,7 @@ jobs:
   test_e2e:
     name: Test (E2E)
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
