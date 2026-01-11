@@ -1,3 +1,4 @@
+import { B } from 'bhala'
 import { getContainerStatus, startContainer } from '../core/container.js'
 import { getServer } from '../core/registry.js'
 
@@ -9,19 +10,19 @@ export async function startCommand(serverName: string, options: StartOptions): P
   const server = await getServer(serverName)
 
   if (!server) {
-    console.error(`Server "${serverName}" is not installed.`)
+    B.error(`Server "${serverName}" is not installed.`)
     process.exit(1)
   }
 
   const containerStatus = await getContainerStatus(server.repository)
 
   if (containerStatus.isRunning) {
-    console.error(`Server "${serverName}" is already running.`)
+    B.error(`Server "${serverName}" is already running.`)
     process.exit(1)
   }
 
   const mode = options.detach ? 'detached' : 'foreground'
-  console.log(`Starting "${serverName}" in ${mode} mode...`)
+  B.info(`Starting "${serverName}" in ${mode} mode...`)
 
   await startContainer(
     server.imageName,
@@ -32,7 +33,7 @@ export async function startCommand(serverName: string, options: StartOptions): P
   )
 
   if (options.detach) {
-    console.log(`Server "${serverName}" is now running in the background.`)
-    console.log(`Use "mocopro stop ${serverName}" to stop it.`)
+    B.success(`Server "${serverName}" is now running in the background.`)
+    B.info(`Use "mocopro stop ${serverName}" to stop it.`)
   }
 }

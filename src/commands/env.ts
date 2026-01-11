@@ -1,3 +1,4 @@
+import { B } from 'bhala'
 import { getServer, updateServer } from '../core/registry.js'
 import type { EnvironmentVariables } from '../types/index.js'
 
@@ -5,7 +6,8 @@ export async function envListCommand(serverName: string): Promise<void> {
   const server = await getServer(serverName)
 
   if (!server) {
-    console.error(`Server "${serverName}" is not installed.`)
+    B.error(`Server "${serverName}" is not installed.`)
+
     process.exit(1)
   }
 
@@ -13,14 +15,15 @@ export async function envListCommand(serverName: string): Promise<void> {
   const envVarEntries = Object.entries(envVars)
 
   if (envVarEntries.length === 0) {
-    console.log(`No environment variables set for "${serverName}".`)
-    console.log(`Use "mocopro env set ${serverName} KEY=value" to add one.`)
+    B.info(`No environment variables set for "${serverName}".`)
+    B.info(`Use "mocopro env set ${serverName} KEY=value" to add one.`)
+
     return
   }
 
-  console.log(`Environment variables for "${serverName}":\n`)
+  B.info(`Environment variables for "${serverName}":\n`)
   for (const [key, value] of envVarEntries) {
-    console.log(`  ${key}=${value}`)
+    B.info(`  ${key}=${value}`)
   }
 }
 
@@ -28,7 +31,8 @@ export async function envSetCommand(serverName: string, keyValuePairs: string[])
   const server = await getServer(serverName)
 
   if (!server) {
-    console.error(`Server "${serverName}" is not installed.`)
+    B.error(`Server "${serverName}" is not installed.`)
+
     process.exit(1)
   }
 
@@ -37,7 +41,8 @@ export async function envSetCommand(serverName: string, keyValuePairs: string[])
   for (const pair of keyValuePairs) {
     const equalsIndex = pair.indexOf('=')
     if (equalsIndex === -1) {
-      console.error(`Invalid format: "${pair}". Expected KEY=value.`)
+      B.error(`Invalid format: "${pair}". Expected KEY=value.`)
+
       process.exit(1)
     }
 
@@ -45,7 +50,8 @@ export async function envSetCommand(serverName: string, keyValuePairs: string[])
     const value = pair.slice(equalsIndex + 1)
 
     if (!key) {
-      console.error(`Invalid format: "${pair}". Key cannot be empty.`)
+      B.error(`Invalid format: "${pair}". Key cannot be empty.`)
+
       process.exit(1)
     }
 
@@ -57,14 +63,15 @@ export async function envSetCommand(serverName: string, keyValuePairs: string[])
     updatedAt: new Date().toISOString(),
   })
 
-  console.log(`Environment variables updated for "${serverName}".`)
+  B.success(`Environment variables updated for "${serverName}".`)
 }
 
 export async function envUnsetCommand(serverName: string, keys: string[]): Promise<void> {
   const server = await getServer(serverName)
 
   if (!server) {
-    console.error(`Server "${serverName}" is not installed.`)
+    B.error(`Server "${serverName}" is not installed.`)
+
     process.exit(1)
   }
 
@@ -72,7 +79,8 @@ export async function envUnsetCommand(serverName: string, keys: string[]): Promi
 
   for (const key of keys) {
     if (!(key in newEnvironmentVariables)) {
-      console.warn(`Warning: "${key}" is not set for "${serverName}".`)
+      B.warn(`"${key}" is not set for "${serverName}".`)
+
       continue
     }
 
@@ -84,5 +92,5 @@ export async function envUnsetCommand(serverName: string, keys: string[]): Promi
     updatedAt: new Date().toISOString(),
   })
 
-  console.log(`Environment variables updated for "${serverName}".`)
+  B.success(`Environment variables updated for "${serverName}".`)
 }

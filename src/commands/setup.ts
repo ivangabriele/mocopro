@@ -1,3 +1,4 @@
+import { B } from 'bhala'
 import { detectContainerRuntime } from '../core/container.js'
 import { getServer } from '../core/registry.js'
 import { ClaudeCode } from '../integrations/index.js'
@@ -18,13 +19,15 @@ export async function setupClaudeAddCommand(serverName: string, options: SetupOp
   const server = await getServer(serverName)
 
   if (!server) {
-    console.error(`Server "${serverName}" is not installed.`)
+    B.error(`Server "${serverName}" is not installed.`)
+
     process.exit(1)
   }
 
   const isAlreadyConfigured = await claudeCode.hasServer(scope, serverName)
   if (isAlreadyConfigured) {
-    console.error(`Server "${serverName}" is already configured in ${claudeCode.name} (${scope} scope).`)
+    B.error(`Server "${serverName}" is already configured in ${claudeCode.name} (${scope} scope).`)
+
     process.exit(1)
   }
 
@@ -39,8 +42,8 @@ export async function setupClaudeAddCommand(serverName: string, options: SetupOp
   await claudeCode.addServer(scope, serverName, serverConfig)
 
   const configPath = claudeCode.getConfigPath(scope)
-  console.log(`Server "${serverName}" has been added to ${claudeCode.name} configuration.`)
-  console.log(`Configuration file: ${configPath}`)
+  B.success(`Server "${serverName}" has been added to ${claudeCode.name} configuration.`)
+  B.info(`Configuration file: ${configPath}`)
 }
 
 export async function setupClaudeRemoveCommand(serverName: string, options: SetupOptions): Promise<void> {
@@ -49,11 +52,12 @@ export async function setupClaudeRemoveCommand(serverName: string, options: Setu
   const wasRemoved = await claudeCode.removeServer(scope, serverName)
 
   if (!wasRemoved) {
-    console.error(`Server "${serverName}" is not configured in ${claudeCode.name} (${scope} scope).`)
+    B.error(`Server "${serverName}" is not configured in ${claudeCode.name} (${scope} scope).`)
+
     process.exit(1)
   }
 
   const configPath = claudeCode.getConfigPath(scope)
-  console.log(`Server "${serverName}" has been removed from ${claudeCode.name} configuration.`)
-  console.log(`Configuration file: ${configPath}`)
+  B.success(`Server "${serverName}" has been removed from ${claudeCode.name} configuration.`)
+  B.info(`Configuration file: ${configPath}`)
 }

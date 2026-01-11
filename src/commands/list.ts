@@ -1,3 +1,4 @@
+import { B } from 'bhala'
 import { getContainerStatus } from '../core/container.js'
 import { listServers } from '../core/registry.js'
 
@@ -5,30 +6,32 @@ export async function listCommand(): Promise<void> {
   const servers = await listServers()
 
   if (servers.length === 0) {
-    console.log('No MCP servers installed.')
-    console.log('Use "mocopro install <repository>" to install a server.')
+    B.info('No MCP servers installed.')
+    B.info('Use "mocopro install <repository>" to install a server.')
+
     return
   }
 
-  console.log('Installed MCP servers:\n')
+  B.log('Installed MCP servers:\n')
 
   for (const server of servers) {
     const containerStatus = await getContainerStatus(server.repository)
     const statusIndicator = containerStatus.isRunning ? '●' : '○'
     const statusText = containerStatus.isRunning ? 'running' : 'stopped'
 
-    console.log(`${statusIndicator} ${server.name}`)
-    console.log(`  Repository: ${server.owner}/${server.repository}`)
-    console.log(`  Branch: ${server.branch}`)
-    console.log(`  Image: ${server.imageName}:${server.imageTag}`)
-    console.log(`  Status: ${statusText}`)
-    console.log(`  Installed: ${formatDate(server.installedAt)}`)
-    console.log(`  Updated: ${formatDate(server.updatedAt)}`)
-    console.log('')
+    console.info(`${statusIndicator} ${server.name}`)
+    console.info(`  Repository: ${server.owner}/${server.repository}`)
+    console.info(`  Branch: ${server.branch}`)
+    console.info(`  Image: ${server.imageName}:${server.imageTag}`)
+    console.info(`  Status: ${statusText}`)
+    console.info(`  Installed: ${formatDate(server.installedAt)}`)
+    console.info(`  Updated: ${formatDate(server.updatedAt)}`)
+    console.info('')
   }
 }
 
 function formatDate(isoDate: string): string {
   const date = new Date(isoDate)
+
   return date.toLocaleString()
 }

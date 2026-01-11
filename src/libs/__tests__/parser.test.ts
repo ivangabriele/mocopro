@@ -3,12 +3,12 @@ import { buildContainerName, buildImageName, parseRepositoryInput } from '../par
 
 describe('parseRepositoryInput', () => {
   test('parses short format owner/repository', () => {
-    const result = parseRepositoryInput('hellokaton/unsplash-mcp-server')
+    const result = parseRepositoryInput('owner/repo')
 
-    expect(result.owner).toBe('drumnation')
-    expect(result.repository).toBe('unsplash-mcp-server')
+    expect(result.owner).toBe('owner')
+    expect(result.repository).toBe('repo')
     expect(result.branch).toBeUndefined()
-    expect(result.fullUrl).toBe('hellokaton/unsplash-mcp-server.git')
+    expect(result.fullUrl).toBe('https://github.com/owner/repo.git')
   })
 
   test('parses short format with branch', () => {
@@ -29,12 +29,12 @@ describe('parseRepositoryInput', () => {
   })
 
   test('parses full GitHub URL', () => {
-    const result = parseRepositoryInput('hellokaton/unsplash-mcp-server')
+    const result = parseRepositoryInput('owner/repo')
 
-    expect(result.owner).toBe('drumnation')
-    expect(result.repository).toBe('unsplash-mcp-server')
+    expect(result.owner).toBe('owner')
+    expect(result.repository).toBe('repo')
     expect(result.branch).toBeUndefined()
-    expect(result.fullUrl).toBe('hellokaton/unsplash-mcp-server.git')
+    expect(result.fullUrl).toBe('https://github.com/owner/repo.git')
   })
 
   test('parses GitHub URL with .git suffix', () => {
@@ -98,16 +98,16 @@ describe('parseRepositoryInput', () => {
 
 describe('buildImageName', () => {
   test('builds correct image name', () => {
-    const result = buildImageName('drumnation', 'unsplash-mcp-server')
+    const result = buildImageName('owner', 'repo')
 
-    expect(result).toBe('mocopro/drumnation-unsplash-mcp-server')
+    expect(result).toBe('mocopro/owner-repo')
   })
 })
 
 describe('buildContainerName', () => {
   test('builds correct container name', () => {
-    const result = buildContainerName('unsplash-mcp-server')
+    const result = buildContainerName('repo')
 
-    expect(result).toBe('mocopro-unsplash-mcp-server')
+    expect(result).toBe('mocopro-repo')
   })
 })

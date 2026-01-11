@@ -108,7 +108,7 @@ describe('mocopro CLI', () => {
 
       expect(result.exitCode).toBe(0)
       expect(result.stdout).toContain(TEST_SERVER_NAME)
-      expect(result.stdout).toContain('drumnation')
+      expect(result.stdout).toContain('hellokaton')
       expect(result.stdout).toContain('stopped')
     })
   })
